@@ -44,11 +44,19 @@ var work = {
 	{
 	"employer": "EUE/Screen Gems Studios",
 	"location": "Los Angeles, CA",
-	"title": "Film Director",
+	"title": "Film Dirctor",
 	"dates": "2008-2014",
 	"description": "Directed the making of films",
 	"url": "http://studios.euescreengems.com/nc/"
-}
+},
+    {
+    "employer": "Kaufman Astoria Studios",
+    "location": "Long Island City, New York",
+    "title": "Screen Writer",
+    "dates": "2006-2008",
+    "description": "Wrote screen plays",
+    "url": "http://www.kaufmanastoria.com/"
+}    
 ]
 }
 function displayWork(){
@@ -68,6 +76,30 @@ function displayWork(){
 }
 }
 displayWork();
+
+var projects = {
+	"projects": [
+	{
+	"title": "Freestyle Chess",
+	"dates": "2014",
+	"description": "Freestyle chess tournaments"
+}
+]
+}
+
+projects.display = function() {
+	for (project in projects.projects) {
+	$("#projects").append(HTMLprojectStart);
+	var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+	$(".project-entry:last").append(formattedTitle);
+	var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+	$(".project-entry:last").append(formattedDates);
+	var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+	$(".project-entry:last").append(formattedDescription);	
+	}
+}
+projects.display();
+
 var education = {
 	"schools": [
 	{
@@ -95,7 +127,7 @@ var education = {
 {
 "title": "JavaScript Basics",
 "school": "Udacity",
-"dates": "2014",
+"dates": "2015",
 "url": "http://www.udacity.com"	
 }
 ]
@@ -127,6 +159,15 @@ $(".education-entry:last").append(formattedOLDates);
 }
 }
 education.display();
+
+$(document).click(function(loc) {
+var x = loc.pageX;
+var y = loc.pagey;
+logClicks(x,y);
+}); 
+
+$("#mapDiv").append(googleMap);
+
 
 
 
