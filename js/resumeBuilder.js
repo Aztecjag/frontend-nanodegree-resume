@@ -1,10 +1,9 @@
 var formattedName = HTMLheaderName.replace("%data%", "Efren Espinosa"); 
-$("#header").prepend(formattedName);
 var formattedRole = HTMLheaderRole.replace("%data%", "Front-end Developer");
 $("#header").append(formattedRole);
 var bio = {
 	"name": "Efren Espinosa",
-	"role": "Junior Web Developer",
+	"role": "Front-end Developer",
 	"contacts": {
 	"mobile": "XXX-345-XXXX",
 	"email": "Efren@gmail.com",
@@ -19,26 +18,32 @@ var bio = {
 "bioPic": "images/fry.jpg"
 }; 
 
-function prependToHeader(what, how) {
-	$("#header").prepend( how.replace("%data%", what) );
+bio.display = function () {
+	var formattedName = HTMLheaderName.replace("%data%", bio.name);
+	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+	var formattedbioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email); 
+	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+	var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+	var formattedwelcomeMessage = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
+	$("#header").prepend(formattedRole);
+	$("#header").prepend(formattedName);
+	$("#header").append(formattedbioPic);
+	$("#header").append(formattedwelcomeMessage);
+	$("#header").append(HTMLskillsStart);
+	$("#topContacts").append(formattedEmail);
+	$("#topContacts").append(formattedMobile);
+	$("#topContacts").append(formattedLocation);
+	$("#topContacts").append(formattedTwitter);
+	$("#topContacts").append(formattedGithub);
+	for (SK in bio.skills) {
+		var formattedSkills = HTMLskills.replace("%data%", bio.skills[SK]);
+		$("#header").append(formattedSkills);
+	}
 }
-
-function appendToResume(what, how, where) {
-	$(where).append( how.replace("%data%", what) );
-}
-
-prependToHeader(bio.role, HTMLheaderRole);
-prependToHeader(bio.name, HTMLheaderName);
-appendToResume(bio.contacts.mobile, HTMLmobile, "#topContacts");
-appendToResume(bio.contacts.email, HTMLemail, "#topContacts");
-appendToResume(bio.contacts.github, HTMLgithub, "#topContacts");
-appendToResume(bio.contacts.twitter, HTMLtwitter, "#topContacts");
-appendToResume(bio.contacts.location, HTMLlocation, "#topContacts");
-appendToResume(bio.bioPic, HTMLbioPic, "#header");
-appendToResume(bio.welcomeMessage, HTMLWelcomeMsg, "#header");
-$("#header").append(HTMLskillsStart);
-appendToResume(bio.skills, HTMLskills, "#skills");
-
+bio.display();
 var work = {
 	"jobs": [
 	{
@@ -51,7 +56,7 @@ var work = {
 },
     {
     "employer": "Kaufman Astoria Studios",
-    "location": "Long Island City, New York",
+    "location": "Long Island City, NY",
     "title": "Screen Writer",
     "dates": "2006-2008",
     "description": "Wrote screen plays",
@@ -59,7 +64,8 @@ var work = {
 }    
 ]
 }
-function displayWork(){
+
+work.display = function () {
 	for(job in work.jobs) {
 	$("#workExperience").append(HTMLworkStart);
 	var EmployerName = HTMLworkEmployer.replace("%data%",work.jobs[job].employer);
@@ -75,7 +81,7 @@ function displayWork(){
 	$(".work-entry:last").append(formattedDisc);
 }
 }
-displayWork();
+work.display();
 
 var projects = {
 	"projects": [
@@ -167,7 +173,5 @@ logClicks(x,y);
 }); 
 
 $("#mapDiv").append(googleMap);
-
-
 
 
